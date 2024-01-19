@@ -6,7 +6,7 @@ import { APODComponents } from "./APODComponents";
 import styles from './HomePage.module.scss'
 import { DatePicker, Space } from 'antd';
 import { RangePickerProps } from "antd/es/date-picker";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 
 
@@ -21,7 +21,7 @@ export const HomePage: React.FC = () => {
     const [form] = Form.useForm()
     const [messageApi, contextHolder] = message.useMessage()
     useEffect(() => {
-        getAPODOneDay(new Date()).then((response) => {
+        getAPODOneDay(dayjs().clone()).then((response) => {
             setApods(() => [response])
             setIsLoading(false)
         })
@@ -52,7 +52,7 @@ export const HomePage: React.FC = () => {
         if (start === undefined || start === null) {
             return false;
         }
-        if (current < start.endOf('day')) {
+        if (current.endOf('day') < start) {
             return true;
         }
         return false;
@@ -66,12 +66,12 @@ export const HomePage: React.FC = () => {
             return;
         }
         setIsLoading(() => true)
-        getAPODPeriod(new Date(values.start_date), new Date(values.end_date))
+        getAPODPeriod(values.start_date, values.end_date)
             .then((response) => {
                 setApods(() => response)
                 setIsLoading(() => false)
             })
-    }
+    }   
 
     return (
         <div className={styles.back}>
