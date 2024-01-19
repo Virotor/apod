@@ -5,6 +5,7 @@ import { Button, Form, Skeleton } from "antd";
 import { APODComponents } from "./APODComponents";
 import styles from './HomePage.module.scss'
 import { DatePicker, Space } from 'antd';
+import { RightCircleTwoTone } from '@ant-design/icons';
 import { RangePickerProps } from "antd/es/date-picker";
 import dayjs from "dayjs";
 
@@ -49,7 +50,7 @@ export const HomePage: React.FC = () => {
 
     return (
         <>
-            <Space direction="vertical" size={12} style={{ width: '100%', backgroundColor: 'skyblue' }}>
+            <div className={styles.space} >
                 <p className={styles.text}>
                     One of the most popular websites at NASA is the Astronomy Picture of the Day. In fact,
                     this website is one of the most popular websites across all federal agencies. It has
@@ -75,7 +76,13 @@ export const HomePage: React.FC = () => {
                         rules={[{ required: true, message: 'Please input date' }]}
                     >
                         <RangePicker
-                            allowClear={true}
+                            separator={
+                                <>To
+                                </>
+                            }
+                            format="YYYY/MM/DD"
+                            showTime
+                            allowClear
                             className={styles.datepicker}
                             disabledDate={disabledDate}
                         />
@@ -89,9 +96,9 @@ export const HomePage: React.FC = () => {
                     </Form.Item>
                 </Form>
                 <Skeleton loading={isLoadind} active>
-                   <APODComponents apods={apods}/>
+                    <APODComponents apods={apods} />
                 </Skeleton>
-            </Space >
+            </div >
         </>
     )
 }

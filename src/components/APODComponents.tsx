@@ -1,6 +1,5 @@
 import { Image, Space, Table, Tag } from "antd";
 import { APOD } from "../scripts/interfaces/APOD";
-import ColumnGroup from "antd/es/table/ColumnGroup";
 import Column from "antd/es/table/Column";
 
 
@@ -19,20 +18,6 @@ export const APODComponents: React.FC<APODProps> = ({ apods }: APODProps) => {
                 <Column title="Title" dataIndex="title" key="lastName" />
                 <Column title="Date" dataIndex="date" key="age" />
                 <Column title="Service_version" dataIndex="service_version" key="address" />
-                {/* <Column
-                    title="Tags"
-                    dataIndex="concepts"
-                    key="tags"
-                    render={(tags: string[]) => (
-                        <>
-                            {tags.map((tag) => (
-                                <Tag color="blue" key={tag}>
-                                    {tag}
-                                </Tag>
-                            ))}
-                        </>
-                    )}
-                /> */}
                 <Column
                     title="Image"
                     key="image"
