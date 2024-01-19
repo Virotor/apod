@@ -1,22 +1,17 @@
 import { useEffect, useState } from "react";
 import { APOD } from "../scripts/interfaces/APOD";
 import { getAPODOneDay, getAPODPeriod } from "../scripts/APICalls";
-import { Button, Form, Skeleton } from "antd";
+import { App, Button, message, Form, Skeleton } from "antd";
 import { APODComponents } from "./APODComponents";
 import styles from './HomePage.module.scss'
 import { DatePicker, Space } from 'antd';
-import { RightCircleTwoTone } from '@ant-design/icons';
 import { RangePickerProps } from "antd/es/date-picker";
 import dayjs from "dayjs";
 
-const { RangePicker } = DatePicker;
 
 
 
 
-const disabledDate: RangePickerProps['disabledDate'] = (current: any) => {
-    return current && current > dayjs().endOf('day');
-};
 
 
 export const HomePage: React.FC = () => {
@@ -24,8 +19,7 @@ export const HomePage: React.FC = () => {
     const [apods, setApods] = useState<APOD[]>([])
     const [isLoadind, setIsLoading] = useState(true)
     const [form] = Form.useForm()
-
-
+    const [messageApi, contextHolder] = message.useMessage()
     useEffect(() => {
         getAPODOneDay(new Date()).then((response) => {
             setApods(() => [response])
@@ -37,11 +31,42 @@ export const HomePage: React.FC = () => {
     }, [])
 
 
+    const errorShow = (message: string) => {
+        messageApi.open({
+            type: 'error',
+            content: message,
+            duration: 4,
+        });
+    };
+
+
+    const disabledDate: RangePickerProps['disabledDate'] = (current: any) => {
+        return current && current > dayjs().endOf('day');
+    };
+
+    const endDisabledDate: RangePickerProps['disabledDate'] = (current: any) => {
+        const start = form.getFieldValue("start_date")
+        if (current && current > dayjs().endOf('day')) {
+            return true;
+        }
+        if (start === undefined || start === null) {
+            return false;
+        }
+        if (current < start.endOf('day')) {
+            return true;
+        }
+        return false;
+    };
+
+
     const handleSubmit = () => {
         const values = form.getFieldsValue()
-        console.log(values)
+        if (values.start_date > values.end_date.endOf('day')) {
+            errorShow("End date should be alter start date!");
+            return;
+        }
         setIsLoading(() => true)
-        getAPODPeriod(new Date(values.date[0]), new Date(values.date[1]))
+        getAPODPeriod(new Date(values.start_date), new Date(values.end_date))
             .then((response) => {
                 setApods(() => response)
                 setIsLoading(() => false)
@@ -49,17 +74,16 @@ export const HomePage: React.FC = () => {
     }
 
     return (
-        <>
+        <div className={styles.back}>
+            {contextHolder}
             <div className={styles.space} >
                 <p className={styles.text}>
                     One of the most popular websites at NASA is the Astronomy Picture of the Day. In fact,
                     this website is one of the most popular websites across all federal agencies. It has
                     the popular appeal of a Justin Bieber video. This endpoint structures the APOD imagery
-                    and associated metadata so that it can be repurposed for other applications. In addition,
-                    if the concept_tags parameter is set to True, then keywords derived from the image explanation
-                    are returned. These keywords could be used as auto-generated hashtags for twitter
+                    and associated metadata so that it can be repurposed for other applications.
+                    These keywords could be used as auto-generated hashtags for twitter
                     or instagram feeds; but generally help with discoverability of relevant imagery.
-                    The full documentation for this API can be found in the APOD API Github repository.
                 </p>
                 <Form
                     className={styles.edit}
@@ -72,19 +96,31 @@ export const HomePage: React.FC = () => {
                 >
 
                     <Form.Item
-                        name='date'
-                        rules={[{ required: true, message: 'Please input date' }]}
+                        name='start_date'
+                        rules={[{ required: true, message: 'Please input start date' }]}
                     >
-                        <RangePicker
-                            separator={
-                                <>To
-                                </>
-                            }
+                        <DatePicker
+                            placeholder="Please enter start date"
                             format="YYYY/MM/DD"
-                            showTime
                             allowClear
+                            showNow
+                            placement='bottomRight'
                             className={styles.datepicker}
                             disabledDate={disabledDate}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name='end_date'
+                        rules={[{ required: true, message: 'Please input end date' }]}
+                    >
+                        <DatePicker
+                            placeholder="Please, enter end date"
+                            format="YYYY/MM/DD"
+                            allowClear
+                            showNow
+                            placement='bottomRight'
+                            className={styles.datepicker}
+                            disabledDate={endDisabledDate}
                         />
                     </Form.Item>
                     <Form.Item
@@ -95,10 +131,13 @@ export const HomePage: React.FC = () => {
                         </Button>
                     </Form.Item>
                 </Form>
+
                 <Skeleton loading={isLoadind} active>
                     <APODComponents apods={apods} />
                 </Skeleton>
+
             </div >
-        </>
+
+        </div>
     )
 }

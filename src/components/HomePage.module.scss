@@ -1,24 +1,7 @@
 $background-color:  rgb(14, 18, 34);
 $text-color: white;
 $shadow : 20px 2.25rem 4.75rem rgb(109, 107, 8);
-$shadow-row : 10px 1.25rem 3.75rem rgb(212, 209, 25);
-
-
-
-.anchor {
-  background-color: white;
-  color : $text-color;
-  margin: 0px 10px;
-  padding: 20px;
-  border-radius: 30px 30px 0px 0px;
-  box-shadow: $shadow-row;
-  div {
-    a{
-      color : yellow
-    }
-  }
-}
-
+$shadow-table : 10px 1.25rem 3.75rem rgb(15, 8, 102);
 
 .space {
     display: flex;
@@ -28,10 +11,12 @@ $shadow-row : 10px 1.25rem 3.75rem rgb(212, 209, 25);
     width: 100%;
     background-color: $background-color;
     color: $text-color;
+   
 }
 
 .edit {
   border-radius: 40px;
+  border:rgb(161, 150, 46) solid 5px;
   padding: 20px 20px 20px 20px;
   margin: 50px 10%;
   display: flex;
@@ -39,7 +24,7 @@ $shadow-row : 10px 1.25rem 3.75rem rgb(212, 209, 25);
   align-items: center;
   justify-items: center;
   box-shadow: $shadow;
-  background-color: yellow;
+  background-color: rgb(211, 194, 42);
   @media only screen and (max-width: 600px) {
     width: 300px;
     }
@@ -54,15 +39,23 @@ $shadow-row : 10px 1.25rem 3.75rem rgb(212, 209, 25);
         width: 700px;
     }
   .datepicker {
-    font-size: calc(10px + 2vmin);
-    border-radius: 30px;
+    font-size: calc(6px + 3vmin);
+    border-radius: 25px;    
     height: calc(30px + 4vh);
     Input {
-        font-size: calc(10px + 2vmin);
+        font-size: calc(6px + 3vmin);
+        width: calc(50px + 30vmin);
         text-align: center;
     }
 
   }
+}
+
+.back{
+    display: block;
+    background-color: $background-color;
+    color: $text-color;
+    height: 100vh;
 }
 
 .text {
@@ -70,4 +63,32 @@ $shadow-row : 10px 1.25rem 3.75rem rgb(212, 209, 25);
     margin : 0px 10%;
     padding: 10px 20px;
     color :$text-color; 
+}
+
+.table {
+    border-radius: 20px;
+    border: solid rgb(25, 136, 136) 10px ;
+    background-color: white;
+    box-shadow:  $shadow-table;
+    margin : 20px;
+    .ant-table-cell{
+        font-size:  calc(20px + 2vmin);
+    }
+    width: 80%;
+}
+
+.image {
+    @media only screen and (max-width: 600px) {
+        width: 300px;
+        }
+        @media only screen and (min-width: 768px) {
+            width: 400px;
+        }
+    
+        @media only screen and (min-width: 992px) {
+            width: 550px;
+        }
+        @media only screen and (min-width: 1200px) {
+            width: 700px;
+        } 
 }
