@@ -1,0 +1,131 @@
+$background-color: black;
+$text-color: white;
+$shadow : 20px 2.25rem 4.75rem rgb(109, 107, 8);
+$shadow-row : 10px 1.25rem 3.75rem rgb(212, 209, 25);
+
+.component {
+  //background-color: $background-color;
+  background-size: cover;
+  color: $text-color;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-self: center;
+  width: 100%;
+  padding: 10px 20px 20px 10px;
+ 
+}
+.rowuserpage {
+  background-color: white ;
+  
+  padding: 20px 50px; 
+  display: flex;
+  margin: 0px 10px;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  border-radius: 0px 0px 30px 30px;
+  box-shadow: $shadow;
+
+}
+.coluserpage {
+  border-radius: 20px;
+  margin: 0px 16px;
+  padding: 20px 16px;
+  min-width: 100%;
+  img{
+      size: 600px;
+  }
+  
+}
+.anchor {
+  background-color: white;
+  color : $text-color;
+  margin: 0px 10px;
+  padding: 20px;
+  border-radius: 30px 30px 0px 0px;
+  box-shadow: $shadow-row;
+  div {
+    a{
+      color : yellow
+    }
+  }
+}
+.row {
+  background-color: black;
+  padding: 30px 20px; 
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  border-radius: 20px;
+  box-shadow: $shadow-row;
+}
+.col {
+  border-radius: 20px;  
+  margin: 16px 16px;
+  padding: 16px 16px;
+  display: flex;
+  flex-direction: column;
+  min-width: 100;
+  img{
+      size: 600px;
+  }
+
+}
+.form {
+  border-radius: 40px;
+  padding: 20px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  Input{
+    font-size: 20px;
+    border-radius: 30px;
+    height: 50px;
+    width: 400px;
+  }
+  Span{
+    font-size: 20px;
+    border-radius: 30px;
+
+  }
+  Button{
+    font-size: 20px;
+    border-radius: 30px;
+    height: 50px;
+    width: 200px;
+    background-color: white;
+    color : rgb(0, 0, 0);
+  } 
+}
+
+
+.edit {
+  border-radius: 40px;
+  padding: 20px 20px 20px 20px;
+  margin: 50px 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  box-shadow: $shadow;
+  background-color: yellow;
+  .datepicker {
+    font-size: calc(10px + 2vmin);
+    border-radius: 30px;
+    height: calc(40px + 4vmin);
+    width: calc(150px + 40vmin);
+    Input {
+        font-size: calc(10px + 2vmin);
+    }
+  }
+}
+
+.text {
+    font-size:  calc(10px + 2vmin);
+    
+    margin : 0px 10%;
+    padding: 10px 20px;
+    color :rgb(0, 0, 0); 
+}

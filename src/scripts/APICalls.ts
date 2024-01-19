@@ -31,16 +31,30 @@ const createURL = (startDate?: Date, endDate?: Date) => {
 }
 
 
-export async function getAPODPeriod(startDate?: Date, endDate?: Date) {
+export async function getAPODPeriod(startDate?: Date, endDate?: Date) : Promise<APOD[]>{
     const url = createURL(startDate, endDate);
     const response = await fetch(url)
     if (response.ok) {
         const data = await response.json()
         console.log(data as APOD)
-        return data;
+        return data as APOD[];
     }
     else {
         return Promise.reject(new Error(`Bad request with start date ${startDate} and end date ${endDate}`))
+    }
+
+}
+
+export async function getAPODOneDay(date? : Date) : Promise<APOD>{
+    const url = createURL(date);
+    const response = await fetch(url)
+    if (response.ok) {
+        const data = await response.json()
+        console.log(data as APOD)
+        return data as APOD;
+    }
+    else {
+        return Promise.reject(new Error(`Bad request`))
     }
 
 }
