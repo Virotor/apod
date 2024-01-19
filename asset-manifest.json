@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/apod/static/css/main.7f3959a6.css",
+    "main.js": "/apod/static/js/main.1c8c6454.js",
+    "static/js/787.f48fa24a.chunk.js": "/apod/static/js/787.f48fa24a.chunk.js",
+    "index.html": "/apod/index.html",
+    "main.7f3959a6.css.map": "/apod/static/css/main.7f3959a6.css.map",
+    "main.1c8c6454.js.map": "/apod/static/js/main.1c8c6454.js.map",
+    "787.f48fa24a.chunk.js.map": "/apod/static/js/787.f48fa24a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7f3959a6.css",
+    "static/js/main.1c8c6454.js"
+  ]
+}
