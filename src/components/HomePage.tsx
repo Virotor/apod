@@ -20,10 +20,15 @@ export const HomePage: React.FC = () => {
     const [isLoadind, setIsLoading] = useState(true)
     const [form] = Form.useForm()
     const [messageApi, contextHolder] = message.useMessage()
+
+    
     useEffect(() => {
         getAPODOneDay(dayjs().clone()).then((response) => {
             setApods(() => [response])
             setIsLoading(false)
+        }).catch((response) => {
+            errorShow("today's APOD is not loaded yet")
+            setIsLoading(() => false)
         })
         return () => {
             setApods(() => [])
@@ -70,8 +75,11 @@ export const HomePage: React.FC = () => {
             .then((response) => {
                 setApods(() => response)
                 setIsLoading(() => false)
+            }).catch((response) => {
+                errorShow("today's APOD is not loaded yet")
+                setIsLoading(() => false)
             })
-    }   
+    }
 
     return (
         <div className={styles.back}>
