@@ -24,8 +24,8 @@ function convertDate(date: Dayjs): Dayjs {
         && date.month() === dayjs().month()
         && date.year() === dayjs().year()) {
         dayjs.extend(utc)
-        dayjs.extend(timezone)
-        const res = dayjs(date).tz('Europe/London')
+        dayjs.extend(timezone)  
+        const res = dayjs(date).tz('America/New_York')
         return res
     }
     else {
