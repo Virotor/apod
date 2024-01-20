@@ -6,4 +6,4 @@
 
 Ссылка на репозиторий [API](https://github.com/nasa/apod-api)
 
-Время в приложении считается относительно (GMT+0)
+Время в приложении считается относительно (GMT-4) timezone America/New_York
